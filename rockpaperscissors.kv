@@ -1,0 +1,80 @@
+MainWidget:
+
+<MainWidget>:
+    orientation: "horizontal"
+
+    BoxLayout:  # USER CHOICE
+        orientation: "vertical"
+        size_hint: .2, .2
+        pos_hint: {"center_y" : .5}
+        Button:
+            text: "A"
+        Button:
+            text: "B"
+        Button:
+            text: "C"
+
+    BoxLayout:  # GAME
+        orientation: "vertical"
+        size_hint: .6, 1
+        Label:
+            size_hint: 1, .6
+            text: "ROCK PAPER SCISSORS"
+            font_name: "fonts/black.ttf"
+            font_size: (root.width+root.height) / 50
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint: 1, .4
+            Label:
+                text: "YOU"
+                font_name: "fonts/bold.ttf"
+                font_size: (root.width+root.height) / 50
+            Label:
+                size_hint: 1, 1
+            Label:
+                text: "AI"
+                font_name: "fonts/bold.ttf"
+                font_size: (root.width+root.height) / 50
+        BoxLayout:
+            orientation: "horizontal"
+            Button:
+                text: "D"
+            Label:
+                text: "VS"
+                font_name: "fonts/extrabold.ttf"
+                font_size: (root.width+root.height) / 50
+            Button:
+                text: "E"
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint: 1, .5
+            Label:
+                text: "1"
+                font_name: "fonts/bold.ttf"
+                font_size: (root.width+root.height) / 50
+            Label:
+                text: "DRAW!"
+                font_name: "fonts/extrabold.ttf"
+                font_size: (root.width+root.height) / 50
+            Label:
+                text: "13"
+                font_name: "fonts/bold.ttf"
+                font_size: (root.width+root.height) / 50
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint: 1, .5
+            Label:
+                text: "x9"
+                font_name: "fonts/bold.ttf"
+                font_size: (root.width+root.height) / 50
+            Label:
+                size_hint: 1, 1
+            Label:
+                text: "x14"
+                font_name: "fonts/bold.ttf"
+                font_size: (root.width+root.height) / 50
+
+    BoxLayout:  # SPACING
+        size_hint: .2, 1
+            
+    
