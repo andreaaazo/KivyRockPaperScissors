@@ -1,15 +1,14 @@
 from kivy.app import App
-from kivy.uix.widget import Widget
 from kivy.uix.relativelayout import RelativeLayout
-from kivy.uix.boxlayout import BoxLayout
 
 
-class MainWidget(BoxLayout):
+class MainWidget(RelativeLayout):
     pass
 
 
 class RockPaperScissorsApp(App):
-    pass
+    def build(self):
+        return MainWidget()
 
 
 RockPaperScissorsApp().run()
