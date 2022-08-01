@@ -7,11 +7,12 @@ MainWidget:
 # cards: #2f3e46
 
 <MainWidget>:
-    canvas.before:
-        Color:
-            rgb: 1, 1, 1
-        Rectangle:
-            size: self.width, self.height
+    Image:
+        source: "lib/background.png"
+        size: self.size
+        pos: 0, 0
+        allow_stretch: True
+        keep_ratio: False
 
     BoxLayout:
         orientation: "horizontal"
@@ -60,15 +61,17 @@ MainWidget:
                     font_size: (root.width+root.height) / 60
             BoxLayout: 
                 orientation: "horizontal"
-                Button:
-                    text:"D"
+
+                MainCardButton:
+
+
                 Label:
                     text: "VS"
                     color: 0, 0, 0
                     font_name: "fonts/extrabold.ttf"
                     font_size: (root.width+root.height) / 50
-                Button:
-                    text: "E"
+                AIDisplay:
+
             RelativeLayout:
                 size_hint: 1, .5
                 canvas.before:
@@ -108,11 +111,24 @@ MainWidget:
                             radius: [30]
                             size: self.width*0.8, self.height*0.5
                             pos: self.width / 2 - self.width*0.8/2, self.height / 2 - self.height*0.5/2
-                    Label:
-                        text: "x9"
-                        color: utils.get_color_from_hex("#84a98c")
-                        font_name: "fonts/bold.ttf"
-                        font_size: (root.width+root.height) / 50
+
+                    BoxLayout:
+                        orientation: "horizontal"
+                        size_hint: .65, .4
+                        pos_hint: {"center_x" : .5, "center_y" : .5}
+
+                        Image:
+                            source: "lib/flame.png"
+                            allow_stretch: True
+                            keep_ratio: True
+                            size_hint: 1, .9
+
+                        Label:
+                            text: "x9"
+                            color: utils.get_color_from_hex("#84a98c")
+                            font_name: "fonts/bold.ttf"
+                            font_size: (root.width+root.height) / 50
+                    
 
                 Label:
                     size_hint: 1, 1
@@ -125,11 +141,53 @@ MainWidget:
                             radius: [30]
                             size: self.width*0.8, self.height*0.5
                             pos: self.width / 2 - self.width*0.8/2, self.height / 2 - self.height*0.5/2
-                    Label:
-                        text: "x14"
-                        color: utils.get_color_from_hex("#84a98c")
-                        font_name: "fonts/bold.ttf"
-                        font_size: (root.width+root.height) / 50
+                    BoxLayout:
+                        orientation: "horizontal"
+                        size_hint: .65, .4
+                        pos_hint: {"center_x" : .5, "center_y" : .5}
+                        
+                        Image:
+                            source: "lib/flame.png"
+                            allow_stretch: True
+                            keep_ratio: True
+                            size_hint: 1, .9
+
+                        Label:
+                            text: "x14"
+                            color: utils.get_color_from_hex("#84a98c")
+                            font_name: "fonts/bold.ttf"
+                            font_size: (root.width+root.height) / 50
 
         BoxLayout:  # SPACING
             size_hint: .2, 1
+
+
+
+
+<MainCardButton@Button>:
+    background_normal: ""
+    background_color: (0,0,0,0)
+    canvas.after:
+        Color:
+            rgb: utils.get_color_from_hex("#2f3e46")
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [30]
+
+
+<AIDisplay@BoxLayout>:
+    padding: 30
+    canvas.before:
+        Color:
+            rgb: utils.get_color_from_hex("#2f3e46")
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [30]
+    Image:
+        source: "lib/rock.png"
+        allow_stretch: True
+        keep_ratio: True
+        size_hint: .5, .5
+        pos_hint: {"center_x" : .5, "center_y" : .5}
