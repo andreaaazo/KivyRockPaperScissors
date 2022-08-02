@@ -7,6 +7,7 @@ MainWidget:
 # cards: #2f3e46
 
 <MainWidget>:
+
     Image:
         source: "lib/background.png"
         size: self.size
@@ -22,18 +23,50 @@ MainWidget:
             size_hint: .2, .2
             pos_hint: {"center_y" : .5}
             spacing: 20
-            Button:
-                text: "A"
-                size_hint: 0.25, 0.5
-                pos_hint: {"center_x" : .5}
-            Button:
-                text: "B"
-                size_hint: 0.25, 0.5
-                pos_hint: {"center_x" : .5}
-            Button:
-                text: "C"
-                size_hint: 0.25, 0.5
-                pos_hint: {"center_x" : .5}
+            ChoiceRoundedButton:
+                id: rock_button
+                Button:
+                    background_normal: ""
+                    background_color: (0,0,0,0)
+                    on_press: 
+                        root.set_button_color(self.parent)
+                        root.on_press_rock_button()
+                    on_release: 
+                        root.reset_button_color(self.parent)
+                    Image:
+                        source: "lib/rock.png"
+                        size: self.parent.size
+                        pos: self.parent.pos
+                
+            ChoiceRoundedButton:
+                id: scissors_button
+                Button:
+                    background_normal: ""
+                    background_color: (0,0,0,0)
+                    on_press:
+                        root.set_button_color(self.parent)
+                        root.on_press_scissors_button()
+                    on_release: 
+                        root.reset_button_color(self.parent)
+                    Image:
+                        source: "lib/scissors.png"
+                        size: self.parent.size
+                        pos: self.parent.pos
+
+            ChoiceRoundedButton:
+                id: paper_button
+                Button:
+                    background_normal: ""
+                    background_color: (0,0,0,0)
+                    on_press:
+                        root.set_button_color(self.parent)
+                        root.on_press_paper_button()
+                    on_release: 
+                        root.reset_button_color(self.parent)
+                    Image:
+                        source: "lib/paper.png"
+                        size: self.parent.size
+                        pos: self.parent.pos
 
         BoxLayout:  # GAME
             orientation: "vertical"
@@ -62,7 +95,21 @@ MainWidget:
             BoxLayout: 
                 orientation: "horizontal"
 
-                MainCardButton:
+                BoxLayout:
+                    padding: 30
+                    canvas.before:
+                        Color:
+                            rgb: utils.get_color_from_hex("#2f3e46")
+                        RoundedRectangle:
+                            size: self.size
+                            pos: self.pos
+                            radius: [30]
+                    Image:
+                        id: user_choice
+                        allow_stretch: True
+                        keep_ratio: True
+                        size_hint: .5, .5
+                        pos_hint: {"center_x" : .5, "center_y" : .5}
 
 
                 Label:
@@ -70,7 +117,23 @@ MainWidget:
                     color: 0, 0, 0
                     font_name: "fonts/extrabold.ttf"
                     font_size: (root.width+root.height) / 50
-                AIDisplay:
+
+                BoxLayout:
+                    padding: 30
+                    canvas.before:
+                        Color:
+                            rgb: utils.get_color_from_hex("#2f3e46")
+                        RoundedRectangle:
+                            size: self.size
+                            pos: self.pos
+                            radius: [30]
+                    Image:
+                        id: ai_choice_image
+                        source: "lib/rock.png"
+                        allow_stretch: True
+                        keep_ratio: True
+                        size_hint: .5, .5
+                        pos_hint: {"center_x" : .5, "center_y" : .5}
 
             RelativeLayout:
                 size_hint: 1, .5
@@ -163,31 +226,17 @@ MainWidget:
 
 
 
-
-<MainCardButton@Button>:
+<ChoiceRoundedButton@BoxLayout>:
+    size_hint: 0.25, 0.5
+    pos_hint: {"center_x" : .5}
     background_normal: ""
     background_color: (0,0,0,0)
-    canvas.after:
-        Color:
-            rgb: utils.get_color_from_hex("#2f3e46")
-        RoundedRectangle:
-            size: self.size
-            pos: self.pos
-            radius: [30]
-
-
-<AIDisplay@BoxLayout>:
-    padding: 30
+    padding: 10
     canvas.before:
         Color:
+            group: "color"
             rgb: utils.get_color_from_hex("#2f3e46")
         RoundedRectangle:
             size: self.size
             pos: self.pos
-            radius: [30]
-    Image:
-        source: "lib/rock.png"
-        allow_stretch: True
-        keep_ratio: True
-        size_hint: .5, .5
-        pos_hint: {"center_x" : .5, "center_y" : .5}
+            radius: [15]
