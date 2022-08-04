@@ -1,5 +1,6 @@
 #: import utils kivy.utils
 MainWidget:
+ai_score: ai_score
 
 # PALETTE:
 # text: #84a98c
@@ -7,7 +8,6 @@ MainWidget:
 # cards: #2f3e46
 
 <MainWidget>:
-
     Image:
         source: "lib/background.png"
         size: self.size
@@ -105,7 +105,7 @@ MainWidget:
                             pos: self.pos
                             radius: [30]
                     Image:
-                        id: user_choice
+                        id: user_choice_img
                         allow_stretch: True
                         keep_ratio: True
                         size_hint: .5, .5
@@ -128,7 +128,7 @@ MainWidget:
                             pos: self.pos
                             radius: [30]
                     Image:
-                        id: ai_choice_image
+                        id: ai_choice_img
                         source: "lib/rock.png"
                         allow_stretch: True
                         keep_ratio: True
@@ -154,6 +154,7 @@ MainWidget:
                         font_name: "fonts/bold.ttf"
                         font_size: (root.width+root.height) / 50
                     Label:
+                        id: scoreboard
                         text: "DRAW!"
                         color: utils.get_color_from_hex("#84a98c")
                         font_name: "fonts/extrabold.ttf"
