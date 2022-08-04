@@ -4,6 +4,8 @@ from kivy.app import App
 from kivy.uix.relativelayout import RelativeLayout
 from kivy.clock import Clock
 import kivy.utils as utils
+from kivy.properties import ObjectProperty, NumericProperty
+
 from time import sleep
 import threading
 from random import randint, choice
@@ -18,17 +20,17 @@ class MainWidget(RelativeLayout):
         "paper": "lib/paper.png",
     }
 
-    ai_choice = None
-    user_choice = None
+    ai_choice = ""
+    user_choice = ""
 
-    user_choice_img = None
-    ai_choice_img = None
+    user_choice_img = ObjectProperty(None)
+    ai_choice_img = ObjectProperty(None)
 
-    scoreboard_text = None
-    scoreboard = None
+    scoreboard_text = ""
+    scoreboard = ObjectProperty(None)
 
-    ai_score = 0
-    user_score = 0
+    ai_score = NumericProperty(0)
+    user_score = NumericProperty(0)
 
     main_thread = threading.Thread
     thread_ai_animation = None
@@ -40,12 +42,6 @@ class MainWidget(RelativeLayout):
 
     def __init__(self, **kw):
         super().__init__(**kw)
-        Clock.schedule_once(self.init_variables, 0)
-
-    def init_variables(self, *args):
-        self.user_choice_img = self.ids.user_choice_img
-        self.ai_choice_img = self.ids.ai_choice_img
-        self.scoreboard = self.ids.scoreboard
 
     def on_press_rock_button(self):
         self.user_choice = "rock"
@@ -63,6 +59,7 @@ class MainWidget(RelativeLayout):
         self.change_user_choice_img()
         self.ai_turn()
         self.check_win()
+        self.update_result_to_gui()
 
     def set_button_color(self, button):
         button_bg = button.canvas.before.get_group("color")[0]
@@ -131,9 +128,19 @@ class MainWidget(RelativeLayout):
         self.user_choice_img.source = self.choices[self.user_choice]
 
     def update_result_to_gui(self):
+        # Update scoreboard
         scoreboard = self.scoreboard
-
         scoreboard.text = self.scoreboard_text
+
+        # Update User and AI score
+        scoreboard_text = self.scoreboard_text
+
+        if scoreboard_text == "WIN":
+            self.user_score += 1
+        elif scoreboard_text == "LOSE":
+            self.ai_score += 1
+        else:
+            pass
 
 
 class RockPaperScissorsApp(App):
