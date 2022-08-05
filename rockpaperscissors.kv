@@ -189,7 +189,7 @@ MainWidget:
                             size_hint: 1, .9
 
                         Label:
-                            text: "x9"
+                            text: str("x" + str(root.user_winstreak))
                             color: utils.get_color_from_hex("#84a98c")
                             font_name: "fonts/bold.ttf"
                             font_size: (root.width+root.height) / 50
@@ -218,13 +218,14 @@ MainWidget:
                             size_hint: 1, .9
 
                         Label:
-                            text: "x14"
+                            text: str("x" + str(root.ai_winstreak))
                             color: utils.get_color_from_hex("#84a98c")
                             font_name: "fonts/bold.ttf"
                             font_size: (root.width+root.height) / 50
 
         BoxLayout:  # SPACING
             size_hint: .2, 1
+            
 
 
 

@@ -4,7 +4,7 @@ from kivy.app import App
 from kivy.uix.relativelayout import RelativeLayout
 from kivy.clock import Clock
 import kivy.utils as utils
-from kivy.properties import ObjectProperty, NumericProperty
+from kivy.properties import ObjectProperty, NumericProperty, StringProperty
 
 from time import sleep
 import threading
@@ -32,9 +32,19 @@ class MainWidget(RelativeLayout):
     ai_score = NumericProperty(0)
     user_score = NumericProperty(0)
 
-    main_thread = threading.Thread
+    user_winstreak = NumericProperty(0)
+    ai_winstreak = NumericProperty(0)
+
+    user_on_winstreak = False
+    ai_on_winstreak = False
+
+    main_thread = None
     thread_ai_animation = None
     thread_check_win = None
+    thread_update_result = None
+    thread_reset_game = None
+
+    game_is_started = False
 
     main_color = "#84A98C"
     second_color = "#2F3E46"
@@ -45,21 +55,25 @@ class MainWidget(RelativeLayout):
 
     def on_press_rock_button(self):
         self.user_choice = "rock"
-        self.main_thread(target=self.main).start()
+        self.main_thread = threading.Thread(target=self.main)
+        self.check_if_game_is_started()
 
     def on_press_scissors_button(self):
         self.user_choice = "scissors"
-        self.main_thread(target=self.main).start()
+        self.main_thread = threading.Thread(target=self.main)
+        self.check_if_game_is_started()
 
     def on_press_paper_button(self):
         self.user_choice = "paper"
-        self.main_thread(target=self.main).start()
+        self.main_thread = threading.Thread(target=self.main)
+        self.check_if_game_is_started()
 
     def main(self):
         self.change_user_choice_img()
         self.ai_turn()
         self.check_win()
         self.update_result_to_gui()
+        self.reset_game()
 
     def set_button_color(self, button):
         button_bg = button.canvas.before.get_group("color")[0]
@@ -95,6 +109,7 @@ class MainWidget(RelativeLayout):
         user_choice = self.user_choice
 
         def start():
+            # Wait for animation to end
             self.thread_ai_animation.join()
 
             if user_choice == "rock":
@@ -128,19 +143,56 @@ class MainWidget(RelativeLayout):
         self.user_choice_img.source = self.choices[self.user_choice]
 
     def update_result_to_gui(self):
-        # Update scoreboard
-        scoreboard = self.scoreboard
-        scoreboard.text = self.scoreboard_text
+        def start():
+            self.thread_check_win.join()
 
-        # Update User and AI score
-        scoreboard_text = self.scoreboard_text
+            scoreboard = self.scoreboard
+            scoreboard_text = self.scoreboard_text
 
-        if scoreboard_text == "WIN":
-            self.user_score += 1
-        elif scoreboard_text == "LOSE":
-            self.ai_score += 1
-        else:
+            # Update scoreboard
+            scoreboard.text = self.scoreboard_text
+
+            # Update User and AI score
+            if scoreboard_text == "WIN":
+                self.user_score += 1
+                self.user_on_winstreak = True
+                self.ai_on_winstreak = False
+                self.check_winstreak()
+
+            elif scoreboard_text == "LOSE":
+                self.ai_score += 1
+                self.user_on_winstreak = False
+                self.ai_on_winstreak = True
+                self.check_winstreak()
+
+            else:
+                pass
+
+        self.thread_update_result = threading.Thread(target=start)
+        self.thread_update_result.start()
+
+    def check_if_game_is_started(self):
+        if self.game_is_started:
             pass
+        else:
+            self.main_thread.start()
+            self.game_is_started = True
+
+    def check_winstreak(self):
+        if self.user_on_winstreak:
+            self.user_winstreak += 1
+            self.ai_winstreak = 0
+        elif self.ai_on_winstreak:
+            self.ai_winstreak += 1
+            self.user_winstreak = 0
+
+    def reset_game(self):
+        def start():
+            self.thread_update_result.join()
+            self.game_is_started = False
+
+        self.thread_reset_game = threading.Thread(target=start)
+        self.thread_reset_game.start()
 
 
 class RockPaperScissorsApp(App):
