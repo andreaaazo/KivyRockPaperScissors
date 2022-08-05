@@ -25,38 +25,13 @@
 <br />
 
 ## ⚡️ Features
-* **Main Features**
-  * Proxy switch
-  * Auto-post
-  * Manage 5 accounts simultaneosly
-  * Informations stored in a database
-
-* **TikTok**
-  * Login
-  * Posting
-
-* **Instagram**
-  * Login
-  * Posting
 
 <br />
 
 <br />
 
 ## 💡 How-We-Made-It
-* **Main Features**
-  * Proxy switch
-  * Auto-post
-  * Manage 5 accounts simultaneosly
-  * Informations stored in a database
 
-* **TikTok**
-  * Login
-  * Posting
-
-* **Instagram**
-  * Login
-  * Posting
 
 <br />
 
