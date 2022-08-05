@@ -29,7 +29,7 @@
 
 - Challenge yourself with the AI bot
 - Check your winstreak and your score
-- Full dinamic game, with some animations
+- Full dynamic game, with some animations
 
 <br />
 
