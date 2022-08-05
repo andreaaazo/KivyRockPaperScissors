@@ -1,16 +1,13 @@
-from concurrent.futures import thread
-from secrets import choice
+import kivy.utils as utils
 from kivy.app import App
 from kivy.uix.relativelayout import RelativeLayout
-from kivy.clock import Clock
-import kivy.utils as utils
-from kivy.properties import ObjectProperty, NumericProperty, StringProperty
+from kivy.properties import ObjectProperty, NumericProperty
 
-from time import sleep
 import threading
-from random import randint, choice
 
-from matplotlib import use
+from secrets import choice
+from time import sleep
+from random import randint, choice
 
 
 class MainWidget(RelativeLayout):
