@@ -150,7 +150,6 @@ Check it out [here](https://github.com/andreaaazo/KivyRockPaperScissors/blob/mai
 - [x] Finish basic game
 - [x] Publish first release
 - [ ] Add AI latest moves history
-- [ ] Add start page
 
 <br />
 
