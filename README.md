@@ -15,62 +15,53 @@
 <br />
 
 ## 📒 Index
-
-- [Features](https://github.com/andreaaazo/KivyRockPaperScissors#-features)
-- [How-We-Made-It](https://github.com/andreaaazo/KivyRockPaperScissors#-features)
-- [To-do](https://github.com/andreaaazo/SocialBot#-to-do)
-- [Frameworks](https://github.com/andreaaazo/SocialBot#-frameworks)
+*  [Features](https://github.com/andreaaazo/KivyRockPaperScissors#%EF%B8%8F-features)
+*  [How-We-Made-It](https://github.com/andreaaazo/KivyRockPaperScissors#-how-we-made-it)
+*  [To-do](https://github.com/andreaaazo/KivyRockPaperScissors#-to-do)
+*  [Frameworks](https://github.com/andreaaazo/KivyRockPaperScissors#-frameworks)
 
 <br />
 
 <br />
 
 ## ⚡️ Features
-
-- Challenge yourself with the AI bot
-- Check your winstreak and your score
-- Full dinamic game, with some animations
+* Challenge yourself with the AI bot
+* Check your winstreak and your score
+* Full dinamic game, with some animations
 
 <br />
 
 <br />
 
 ## 💡 How-We-Made-It
-
-#### Introduction
-
+### Introduction
 To create our GUI we used the `Kivy` framework.
-
 ```python
 import kivy.utils as utils
 from kivy.app import App
 from kivy.uix.relativelayout import RelativeLayout
 from kivy.properties import ObjectProperty, NumericProperty
 ```
-
 With the `Kivy` framework we have created the app. The full game stays in the `MainWidget` class.
-
 ```python
 class RockPaperScissorsApp(App):
     def build(self):
         return MainWidget()
-```
+``` 
 
 <br />
 
-#### Realizing the GUI
-
+### Realizing the GUI
 Before start coding the GUI, we used Figma to create a prototype and setting up the aspect of our game.
 We also draw the widget layouts to help us code faster, and to undestand better which layout to use.
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png)
+
+![alt text](https://github.com/andreaaazo/KivyRockPaperScissors/blob/main/unusued/gui.png)
 
 The interface is fully coded in the `rockpaperscissors.kv` file.  
-Check it out [here](https://www.google.com).
+Check it out [here](https://github.com/andreaaazo/KivyRockPaperScissors/blob/main/rockpaperscissors.kv).
 
-#### Passing objects from `.kv` to `.py`
-
-To pass the needed objects, firstly, we have declared some variables at the beginning of the widget definition in the `.kv` file:
-
+### Passing objects from `.kv` to `.py`
+To pass the needed objects, firstly, we have declared some variables at the beginning of the widget definition in the `.kv` file:  
 ```
 <MainWidget>:
 
@@ -80,7 +71,6 @@ To pass the needed objects, firstly, we have declared some variables at the begi
 ```
 
 Secondarly, we have assigned an `id` to the desired objects, with the same name of the variable:
-
 ```
 Image:
   id: user_choice_img
@@ -88,34 +78,27 @@ Image:
 ```
 
 In the `main.py` file we have declared the same variables, with the value `ObjectProperty(None)`:
-
 ```python
 user_choice_img = ObjectProperty(None)
 ```
 
-#### Passing variables from `.py` to `.kv`
-
+### Passing variables from `.py` to `.kv`
 To update the text labels dynamically, we have declared some variables in the `.py` file. With the value `NumericProperty(0)` for an integer, and `StringProperty("")` for a string:
-
 ```python
 ai_score = NumericProperty(0)
 ```
-
 To pass the variables in the `.ky` file, we simply wrote `root.` before the declaration:
-
 ```
 Label:
     text: str(root.ai_score)
 ```
 
-#### Writing the game mechanics
+### Writing the game mechanics
+We wrote the mechanics in the `MainWidget()` class in the `.py` file.  
 
-We wrote the mechanics in the `MainWidget()` class in the `.py` file.
-
-We implemented `Threading` to help us to manage better the timing, and it gave us the ability to create some funny animations.
+We implemented `Threading` to help us to manage better the timing, and it gave us the ability to create some funny animations.  
 
 Every `Button` action, raises the `main` function and starts a new `Thread`:
-
 ```python
 def main(self):
     self.change_user_choice_img()
@@ -126,7 +109,6 @@ def main(self):
 ```
 
 To help us to manage the Bot animation we used the function `.join()`:
-
 ```python
 def check_win(self):
         ai_choice = self.ai_choice
@@ -136,16 +118,14 @@ def check_win(self):
             # Wait for animation to end
             self.thread_ai_animation.join()
 ```
-
 The game mechanic is fully coded in the `main.py` file.  
-Check it out [here](https://www.google.com).
+Check it out [here](https://github.com/andreaaazo/KivyRockPaperScissors/blob/main/main.py).
 
 <br />
 
 <br />
 
 ## 👀 To-do
-
 - [x] Finish basic game
 - [x] Publish first release
 - [ ] Add AI latest moves history
@@ -156,13 +136,13 @@ Check it out [here](https://www.google.com).
 <br />
 
 ## 🧬 Frameworks
+[Kivy](https://kivy.org/doc/stable/)
 
-[Kivy](https://github.com/SeleniumHQ/selenium)
+[Threading](https://docs.python.org/3/library/threading.html)
 
-[Threading](https://github.com/SeleniumHQ/selenium)
+[Random](https://docs.python.org/3/library/random.html)
 
-[Random](https://docs.python.org/3/library/tk.html)
+[Secrets](https://docs.python.org/3/library/secrets.html)
 
-[Secrets](https://docs.python.org/3/library/tk.html)
+[Time](https://docs.python.org/3/library/time.html)
 
-[Time](https://docs.python.org/3/library/tk.html)
