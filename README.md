@@ -1,6 +1,6 @@
 <div align="center">
 
-  <h1> Social Bot </h1>
+  <h1> KivyRockPaperScissors </h1>
 
   <br />
 
