@@ -10,9 +10,9 @@ from random import randint, choice
 
 class MainWidget(RelativeLayout):
     choices = {
-        "rock": "lib/rock.png",
-        "scissors": "lib/scissors.png",
-        "paper": "lib/paper.png",
+        "rock": "assets/images/rock.png",
+        "scissors": "assets/images/scissors.png",
+        "paper": "assets/images/paper.png",
     }
 
     ai_choice = ""
