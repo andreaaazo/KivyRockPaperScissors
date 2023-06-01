@@ -33,7 +33,7 @@ MainWidget:
                     background_color: (0,0,0,0)
                     on_press: 
                         root.set_button_color(self.parent)
-                        root.on_press_rock_button()
+                        root.on_press_button("rock")
                     on_release: 
                         root.reset_button_color(self.parent)
                     Image:
@@ -47,7 +47,7 @@ MainWidget:
                     background_color: (0,0,0,0)
                     on_press:
                         root.set_button_color(self.parent)
-                        root.on_press_scissors_button()
+                        root.on_press_button("scissors")
                     on_release: 
                         root.reset_button_color(self.parent)
                     Image:
@@ -61,7 +61,7 @@ MainWidget:
                     background_color: (0,0,0,0)
                     on_press:
                         root.set_button_color(self.parent)
-                        root.on_press_paper_button()
+                        root.on_press_button("paper")
                     on_release: 
                         root.reset_button_color(self.parent)
                     Image:
