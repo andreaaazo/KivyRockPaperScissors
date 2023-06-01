@@ -63,7 +63,7 @@ class RockPaperScissorsApp(App):
 Before start coding the GUI, we used Figma to create a prototype and setting up the aspect of our game.
 We also draw the widget layouts to help us code faster, and to undestand better which layout to use.
 
-![alt text](https://github.com/andreaaazo/KivyRockPaperScissors/blob/main/unusued/gui.png)
+![alt text](https://github.com/andreaaazo/KivyRockPaperScissors/blob/main/preview/gui.png)
 
 The interface is fully coded in the `rockpaperscissors.kv` file.  
 Check it out [here](https://github.com/andreaaazo/KivyRockPaperScissors/blob/main/rockpaperscissors.kv).
